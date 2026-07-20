@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl"
+       class="in-text"
+       version="1.0"
+       default-locale="ja-JP">
+
+  <info>
+    <title>Japanese Report Numeric</title>
+    <id>http://www.zotero.org/styles/japanese-report-numeric</id>
+    <link href="http://www.zotero.org/styles/japanese-report-numeric" rel="self"/>
+    <author>
+      <name>Custom</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <updated>2026-06-19T00:00:00+00:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name delimiter="，"/>
+      <substitute>
+        <text variable="publisher"/>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <choose>
+      <if variable="title">
+        <text variable="title"/>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="container">
+    <choose>
+      <if variable="container-title">
+        <text variable="container-title"/>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="publisher">
+    <choose>
+      <if variable="publisher page" match="any">
+        <group delimiter="，">
+          <text variable="publisher"/>
+          <text variable="page" prefix="p."/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="year">
+    <choose>
+      <if variable="issued">
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="url">
+    <choose>
+      <if variable="URL">
+        <text variable="URL"/>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="note">
+    <choose>
+      <if variable="note">
+        <text variable="note"/>
+      </if>
+    </choose>
+  </macro>
+
+  <citation collapse="citation-number">
+    <layout prefix="[" suffix="]" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography>
+    <layout>
+      <text variable="citation-number" prefix="[" suffix="] "/>
+      <group delimiter="，">
+        <text macro="author"/>
+        <text macro="title"/>
+        <text macro="container"/>
+        <text macro="publisher"/>
+        <text macro="year"/>
+        <text macro="url"/>
+        <text macro="note"/>
+      </group>
+    </layout>
+  </bibliography>
+
+</style>

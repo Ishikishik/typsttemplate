@@ -1,0 +1,5 @@
+{
+  "tinymist.exportPdf": "onSave",
+  "tinymist.exportPdfPath": "$root/$name.pdf",
+  "tinymist.rootPath": "report.typ"
+}
