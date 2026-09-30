@@ -9,7 +9,8 @@
   author: "氏名",
   experiment-date: "",
   submit-date: "",
-  cover-pdf: "data/cover.pdf",
+  with-cover: false,
+  cover-pdf: "cover.pdf",
   body,
 ) = {
   set page(
@@ -19,40 +20,33 @@
     number-align: center,
   )
 
-
-
-    // 表紙PDFを先頭に入れる
-  if cover-pdf != none {
+  // with-cover: true のときだけ表紙を挿入
+  if with-cover {
     pagebreak(weak: true)
     image(cover-pdf, width: 100%)
     pagebreak()
   }
 
- set table(
-  inset: (x: 0.8em, y: 0.6em),
-  stroke: none,
-)
+  set table(
+    inset: (x: 0.8em, y: 0.6em),
+    stroke: none,
+  )
 
-set table.hline(
-  stroke: 0.6pt,
-)
+  set table.hline(stroke: 0.6pt)
+  set table.vline(stroke: 0.6pt)
 
-set table.vline(
-  stroke: 0.6pt,
-)
+  show figure.where(kind: table): set figure.caption(position: top)
 
-show figure.where(kind: table): set figure.caption(position: top)
+  set text(
+    lang: "ja",
+    region: "jp",
+    font: (
+      "Hiragino Mincho ProN",
+      "Times New Roman",
+    ),
+    size: 11pt,
+  )
 
-
- set text(
-  lang: "ja",
-  region: "jp",
-  font: (
-    "Hiragino Mincho ProN",
-    "Times New Roman"
-  ),
-  size: 11pt,
-)
   set par(
     first-line-indent: 1em,
     justify: true,
@@ -81,8 +75,8 @@ show figure.where(kind: table): set figure.caption(position: top)
 
   align(center)[
     #text(
-    font: "Hiragino Mincho ProN",
-    size: 18pt
+      font: "Hiragino Mincho ProN",
+      size: 18pt,
     )[#title]
 
     #v(1.5em)
@@ -95,13 +89,15 @@ show figure.where(kind: table): set figure.caption(position: top)
     ]
 
     #v(1.5em)
-
-    #experiment-date 実験 \
-    #submit-date 提出
+    #if experiment-date != "" [
+  #block[実験日：#experiment-date]
+]
+#if submit-date != "" [
+  #block[提出日：#submit-date]
+]
   ]
 
   v(2.5em)
-
 
   body
 }
